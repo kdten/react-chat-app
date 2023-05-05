@@ -1,10 +1,12 @@
 const PORT = 8000;
 import express from 'express';
 const app = express();
-// import cors from 'cors';
+import cors from 'cors';
 // import axios from 'axios';
 import dotenv from 'dotenv';
 dotenv.config();
+
+app.use(cors());
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -16,8 +18,7 @@ const firebaseConfig = {
     measurementId: process.env.MEASUREMENT_ID
   };
 
-
-app.get('/', (req, res) => {
+app.get('/keys', (req, res) => {
     res.json(firebaseConfig);
 });
 
