@@ -63,13 +63,7 @@ const ServerSidebar = ({ onServerClick, selectedServer }) => {
   const settingsServer = servers.find((server: any) => server.id === 'ulzj52o2cbECX8pMxKWy');
   const otherServers = servers.filter((server: any) => !['OcEzrrD1p0pLEohpJ6nG', 'wRkznO8i1hxgMqzzCYlz', '8W28zAzrF5jHBbNvq4CI', 'ulzj52o2cbECX8pMxKWy'].includes(server.id));
 
-  type ServerSidebarIconProps = {
-    icon: any;
-    id: any;
-    name: any;
-    onClick: any;
-    selectedServerId: any;
-  };
+
   
   return (
     <div className="fixed top-0 left-0 h-screen w-16 flex flex-col bg-white dark:bg-gray-900 shadow-lg">
@@ -127,8 +121,17 @@ const ServerSidebar = ({ onServerClick, selectedServer }) => {
   );
 };
 
+type ServerSidebarIconProps = {
+  icon: any;
+  id: any;
+  name: any;
+  onClick: any;
+  selectedServerId: any;
+};
 
 const ServerSidebarIcon = ({ icon, id, name, onClick, selectedServerId }: ServerSidebarIconProps) => {
+
+
   return (
     <div className={`sidebar-icon group ${selectedServerId === id ? 'selected' : ''}`} onClick={() => onClick(id, name)}>
       <span

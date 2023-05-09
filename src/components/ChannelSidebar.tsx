@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import PopupContext from '../contexts/PopupContext';
+import ChannelContext from '../contexts/ChannelContext';
+import TopicContext from '../contexts/TopicContext';
+
 import { FaPlus, FaChevronDown, FaChevronRight } from 'react-icons/fa';
 import { BsHash } from 'react-icons/bs';
-import Settings from './Settings'; // Adjust the path to the location of your Settings component
+import Settings from './Settings';
 
 import { doc, getDoc, where } from "firebase/firestore";
 import {
@@ -15,8 +19,11 @@ import {
 
 
 const ChannelSidebar = ( {selectedServer} ) => {
-  const [currentChannels, setCurrentChannels] = useState([]);
-  const [currentTopics, setCurrentTopics] = useState([]);
+  const { currentChannels, setCurrentChannels } = useContext(ChannelContext);
+  const { currentTopics, setCurrentTopics } = useContext(TopicContext);
+  const { showPopup, setShowPopup } = useContext(PopupContext);
+  
+
 
 
   useEffect(() => {
@@ -93,6 +100,7 @@ const ChannelSidebar = ( {selectedServer} ) => {
 
 const Dropdown = ({ header, topicNames, selectedServer }) => {
   const [expanded, setExpanded] = useState(true);
+  const { showPopup, setShowPopup } = useContext(PopupContext);
 
   return (
     <div className='dropdown'>
@@ -103,13 +111,19 @@ const Dropdown = ({ header, topicNames, selectedServer }) => {
         >
           {header}
         </h5>
-        <FaPlus size='12' className='text-accent text-opacity-80 my-auto ml-auto' />
+        <div className="ml-auto p-1" onClick={() => setShowPopup(true)}>        
+          <FaPlus size='12' className='text-accent text-opacity-80 my-auto ml-auto' />
+        </div>
       </div>
       {expanded &&
         topicNames &&
         topicNames.map((selection) => <TopicSelection selection={selection} />)}
     </div>
   );
+};
+
+const topicClick = () => {
+  console.log('Topic clicked');
 };
 
 
@@ -123,7 +137,7 @@ const ChevronIcon = ({ expanded }) => {
 };
 
 const TopicSelection = ({ selection }) => (
-  <div className='dropdown-selection'>
+  <div className='dropdown-selection' onClick={() => topicClick()}>
     <BsHash size='24' className='text-gray-400' />
     <h5 className='dropdown-selection-text'>{selection}</h5>
   </div>

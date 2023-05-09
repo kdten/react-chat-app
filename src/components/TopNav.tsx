@@ -9,7 +9,7 @@ import {
   } from 'react-icons/fa';
   import useDarkMode from '../hooks/useDarkMode';
   
-  const TopNavigation = () => {
+  const TopNav = () => {
     return (
       <div className='top-navigation'>
         <HashtagIcon />
@@ -47,5 +47,5 @@ import {
   const HashtagIcon = () => <FaHashtag size='20' className='title-hashtag' />;
   const Title = () => <h5 className='title-text'>tailwind-css</h5>;
   
-  export default TopNavigation;
+  export default TopNav;
   
