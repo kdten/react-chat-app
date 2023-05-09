@@ -24,25 +24,24 @@ const Layout = () => {
   
     return (
       <ChannelProvider>
-      <TopicProvider>
-      <PopupProvider>
-      <div className="flex">
-      <ServerSidebar
-        onServerClick={handleServerClick}
-        selectedServer={selectedServer}
-      />
-      {/* <ChannelHeader /> */}
-      <ChannelSidebar selectedServer={selectedServer} />
-      <TopNav />
-      {/* <MessageArea />
-      <MessageInputBar /> */}
-  </div>
-  <PopupRenderer />
-
-  </PopupProvider>
-  </TopicProvider>
-    </ChannelProvider>
-)
+        <TopicProvider>
+          <PopupProvider>
+            <div className="flex">
+              <ServerSidebar
+                onServerClick={handleServerClick}
+                selectedServer={selectedServer}
+              />
+              {/* <ChannelHeader /> */}
+              <ChannelSidebar selectedServer={selectedServer} />
+              <TopNav />
+              {/* <MessageArea />
+              <MessageInputBar /> */}
+            </div>
+            <PopupRenderer />
+          </PopupProvider>
+        </TopicProvider>
+      </ChannelProvider>
+    );
         };
 
 

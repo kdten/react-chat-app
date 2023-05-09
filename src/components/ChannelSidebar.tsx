@@ -22,9 +22,6 @@ const ChannelSidebar = ( {selectedServer} ) => {
   const { currentChannels, setCurrentChannels } = useContext(ChannelContext);
   const { currentTopics, setCurrentTopics } = useContext(TopicContext);
   const { showPopup, setShowPopup } = useContext(PopupContext);
-  
-
-
 
   useEffect(() => {
     // Fetch the channels from the database
@@ -57,10 +54,6 @@ const ChannelSidebar = ( {selectedServer} ) => {
         
       });
       
-      // Topic fetching
-      // const topicsCollection = collection(db, "topics");
-      // const topicsCollectionForServerIdQuery = query(topicsCollection, where("channelid", "in", channel.topics));
-      // Cleanup function to unsubscribe from the snapshot listener when the component is unmounted or selectedServer changes
       return () => unsubscribe();
     }
 

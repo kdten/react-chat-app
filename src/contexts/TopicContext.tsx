@@ -1,8 +1,8 @@
-import React, { createContext } from 'react';
+import React, { useState, createContext } from 'react';
 
 interface Topic {
   id: string;
-  [key: string]: any;
+  name: string;
 }
 
 interface TopicContextValue {
@@ -14,5 +14,19 @@ const TopicContext = createContext<TopicContextValue>({
   currentTopics: [],
   setCurrentTopics: () => {},
 });
+
+interface TopicProviderProps {
+  children: React.ReactNode;
+}
+
+export const TopicProvider: React.FC<TopicProviderProps> = ({ children }) => {
+  const [currentTopics, setCurrentTopics] = useState<Topic[]>([]);
+
+  return (
+    <TopicContext.Provider value={{ currentTopics, setCurrentTopics }}>
+      {children}
+    </TopicContext.Provider>
+  );
+};
 
 export default TopicContext;
