@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { BsPlus, BsGlobe, BsGearFill } from 'react-icons/bs';
 // import { FaCamera, FaCat, FaHashtag, FaLeaf, FaCode, FaWrench, FaCheck, FaList, FaSnowflake, FaTv, FaQuestion, FaMusic, FaBell, FaTag, FaBook, FaTruck, FaMap, FaImage, FaAtom, FaGamepad, FaCampground, FaFilm } from 'react-icons/fa';
-import { FaFire } from 'react-icons/fa';
-import { getFirestore, collection, query, orderBy, onSnapshot, getDocs } from 'firebase/firestore';
-// import { Link } from 'next/link'
-// import { useState } from 'react';
+import { FaComments } from 'react-icons/fa';// import { Link } from 'next/link'
+import {
+  getFirestore,
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  getDocs,
+} from '../firebase';
+
 
 import '../App.css';
 
@@ -34,8 +40,8 @@ const ServerSidebar = ({ onServerClick, selectedServer }) => {
 
   const getIconElement = (iconString) => {
     switch (iconString) {
-      case 'FaFire':
-        return <FaFire size="28" />;
+      case 'FaComments':
+        return <FaComments size="28" />;
       case 'BsGlobe':
         return <BsGlobe size="28" />;
       case 'BsPlus':
@@ -55,17 +61,23 @@ const ServerSidebar = ({ onServerClick, selectedServer }) => {
   const globalChatServer = servers.find((server: any) => server.id === 'wRkznO8i1hxgMqzzCYlz');
   const addServer = servers.find((server: any) => server.id === '8W28zAzrF5jHBbNvq4CI');
   const settingsServer = servers.find((server: any) => server.id === 'ulzj52o2cbECX8pMxKWy');
-  const otherServers = servers.filter((server: any) => !['directmessages', 'settings', 'addserver', 'globalchat'].includes(server.dataserver));
+  const otherServers = servers.filter((server: any) => !['OcEzrrD1p0pLEohpJ6nG', 'wRkznO8i1hxgMqzzCYlz', '8W28zAzrF5jHBbNvq4CI', 'ulzj52o2cbECX8pMxKWy'].includes(server.id));
 
-
+  type ServerSidebarIconProps = {
+    icon: any;
+    id: any;
+    name: any;
+    onClick: any;
+    selectedServerId: any;
+  };
+  
   return (
     <div className="fixed top-0 left-0 h-screen w-16 flex flex-col bg-white dark:bg-gray-900 shadow-lg">
   {directMessagesServer && (
     <ServerSidebarIcon
       id={directMessagesServer.id}
       icon={getIconElement(directMessagesServer.icon)}
-      text={directMessagesServer.name}
-      dataserver={directMessagesServer.dataserver}
+      name={directMessagesServer.name}
       onClick={() => onServerClick(directMessagesServer.id, directMessagesServer.name)}
       selectedServerId={selectedServer.id}
     />
@@ -77,8 +89,7 @@ const ServerSidebar = ({ onServerClick, selectedServer }) => {
     <ServerSidebarIcon
       id={globalChatServer.id}
       icon={getIconElement(globalChatServer.icon)}
-      text={globalChatServer.name}
-      dataserver={globalChatServer.dataserver}
+      name={globalChatServer.name}
       onClick={() => onServerClick(globalChatServer.id, globalChatServer.name)}
       selectedServerId={selectedServer.id}/>
   )}
@@ -87,8 +98,7 @@ const ServerSidebar = ({ onServerClick, selectedServer }) => {
     <ServerSidebarIcon
       id={server.id}
       icon={getIconElement(server.icon)}
-      text={server.name}
-      dataserver={server.dataserver}
+      name={server.name}
       onClick={() => onServerClick(server.id, server.name)}
       selectedServerId={selectedServer.id}/>
   ))}
@@ -99,8 +109,7 @@ const ServerSidebar = ({ onServerClick, selectedServer }) => {
     <ServerSidebarIcon
       id={addServer.id}
       icon={getIconElement(addServer.icon)}
-      text={addServer.name}
-      dataserver={addServer.dataserver}
+      name={addServer.name}
       onClick={() => onServerClick(addServer.id, addServer.name)}
       selectedServerId={selectedServer.id}/>
   )}
@@ -109,8 +118,7 @@ const ServerSidebar = ({ onServerClick, selectedServer }) => {
     <ServerSidebarIcon
       id={settingsServer.id}
       icon={getIconElement(settingsServer.icon)}
-      text={settingsServer.name}
-      dataserver={settingsServer.dataserver}
+      name={settingsServer.name}
       onClick={() => onServerClick(settingsServer.id, settingsServer.name)}
       selectedServerId={selectedServer.id}/>
   )}
@@ -119,14 +127,15 @@ const ServerSidebar = ({ onServerClick, selectedServer }) => {
   );
 };
 
-const ServerSidebarIcon = ({ icon, text, id, name, onClick, selectedServerId }) => {
+
+const ServerSidebarIcon = ({ icon, id, name, onClick, selectedServerId }: ServerSidebarIconProps) => {
   return (
     <div className={`sidebar-icon group ${selectedServerId === id ? 'selected' : ''}`} onClick={() => onClick(id, name)}>
       <span
         className={`sidebar-icon-pill ${selectedServerId === id ? 'h-10' : 'group-hover:h-6'}`}
       ></span>
       {icon}
-      <span className="sidebar-tooltip group-hover:scale-100">{text}</span>
+      <span className="sidebar-tooltip group-hover:scale-100">{name}</span>
     </div>
   );
 };
