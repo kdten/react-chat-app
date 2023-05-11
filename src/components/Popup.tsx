@@ -1,35 +1,47 @@
-import React from 'react';
-import { useState } from 'react';
-// import 22 fontawesome icons from 
-import { FaCamera, FaCat, FaHashtag, FaLeaf, FaCode, FaWrench, FaCheck, FaList, FaSnowflake, FaTv, FaQuestion, FaMusic, FaBell, FaTag, FaBook, FaTruck, FaMap, FaImage, FaAtom, FaGamepad, FaCampground, FaFilm } from 'react-icons/fa';
-import { BsPlus } from 'react-icons/bs';
+import React, { useRef, useEffect, useContext, onClose  } from 'react';
+import PopupContext from '../contexts/PopupContext';
+// import AddServerPopup from './AddServerPopup';
+// import AddChannelContent from './AddChannelContent';
 
-const icons: object[] = [FaCamera, FaCat, FaHashtag, FaLeaf, FaCode, FaWrench, FaCheck, FaList, FaSnowflake, FaTv, FaQuestion, FaMusic, FaBell, FaTag, FaBook, FaTruck, FaMap, FaImage, FaAtom, FaGamepad, FaCampground, FaFilm];
+const Popup = ({ children, title, subtitle }) => {
+  const popupRef = useRef();
+  const { setShowPopup } = useContext(PopupContext);
 
-const Popup = () => {
-    const [selectedIcon, setSelectedIcon] = useState(null);
+  const handleClickOutside = (event) => {
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
+      setShowPopup({ type: '', show: false });
+    }
+  };
+
+  const handleCloseButtonClick = () => {
+    if (onClose) {
+      onClose();
+    } else {
+      setShowPopup({ type: "", show: false });
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   
     return (
-        <div className="add-server-popup-overlay">
-        <div className="add-server-popup">
-        <div className="popup-header">
-          <h2 className="popup-title">Create a server</h2>
-          <p className="popup-subtitle">
-            Your server is where you and your friends hang out.
-          </p>
-          <button className="popup-close">
-            X
-          </button>
-        </div>
-        <div className="popup-content">
-        <div className="icon-grid scrollbar-hide">
-        
+      <div className="popup-overlay">
+        <div className="popup" ref={popupRef}>
+          <div className="popup-header">
+            <h2 className="popup-title">{title}</h2>
+            <p className="popup-subtitle">{subtitle}</p>
+            <button className="popup-close" onClick={handleCloseButtonClick}>
+              <h1>X</h1>
+            </button>
+          </div>
 
-              </div>
-            </div>
-        {/* Add the content div in the next step */}
+          <div className="popup-content">{children}</div>
+        </div>
       </div>
-    </div>
     );
   };
   

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { ChannelProvider } from '../contexts/ChannelContext';
 import { TopicProvider } from '../contexts/TopicContext';
-import { PopupProvider } from '../contexts/PopupContext';
-import PopupContext from '../contexts/PopupContext';
+import PopupContext, { PopupProvider } from '../contexts/PopupContext';
+import AddServerPopup from './AddServerPopup';
 
 import Popup from './Popup';
 import ServerSidebar from './ServerSidebar'
@@ -46,11 +46,17 @@ const Layout = () => {
 
 
         const PopupRenderer = () => {
-          const { showPopup }: any = useContext(PopupContext);
+          const { showPopup, setShowPopup } = useContext(PopupContext);
+        
+          const handleClose = () => {
+            setShowPopup({ type: "", show: false });
+          };
         
           return (
             <>
-              {showPopup && <Popup />}
+              {showPopup.show && showPopup.type === "ADD_SERVER" && (
+                <AddServerPopup onClose={handleClose} />
+              )}
             </>
           );
         };

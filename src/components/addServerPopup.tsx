@@ -1,36 +1,53 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import 22 fontawesome icons from 
 import { FaCamera, FaCat, FaHashtag, FaLeaf, FaCode, FaWrench, FaCheck, FaList, FaSnowflake, FaTv, FaQuestion, FaMusic, FaBell, FaTag, FaBook, FaTruck, FaMap, FaImage, FaAtom, FaGamepad, FaCampground, FaFilm } from 'react-icons/fa';
 import { BsPlus } from 'react-icons/bs';
+import Popup from './Popup';
 
 const icons: object[] = [FaCamera, FaCat, FaHashtag, FaLeaf, FaCode, FaWrench, FaCheck, FaList, FaSnowflake, FaTv, FaQuestion, FaMusic, FaBell, FaTag, FaBook, FaTruck, FaMap, FaImage, FaAtom, FaGamepad, FaCampground, FaFilm];
 
-const AddServerPopup = () => {
-    const [selectedIcon, setSelectedIcon] = useState(null);
-  
-    return (
-        <div className="add-server-popup-overlay">
-        <div className="add-server-popup">
-        <div className="popup-header">
-          <h2 className="popup-title">Create a server</h2>
-          <p className="popup-subtitle">
-            Your server is where you and your friends hang out.
-          </p>
-          <button className="popup-close">
-            X
-          </button>
-        </div>
-        <div className="popup-content">
-        <div className="icon-grid scrollbar-hide">
-        
+const AddServerPopup = ({ onClose }) => {
+  const [selectedIcon, setSelectedIcon] = useState(icons[0]);
 
-              </div>
-            </div>
-        {/* Add the content div in the next step */}
-      </div>
+
+  useEffect(() => {
+    console.log('selectedIcon:', selectedIcon);
+  }, [selectedIcon]);
+
+  return (
+    <Popup title="Create a Server" subtitle="Create a globally available Server">
+        <div className="add-server-icon-area">
+          {icons.map((Icon, index) => (
+            <PopupIcon
+              key={index}
+              IconComponent={Icon}
+              isSelected={selectedIcon === Icon}
+              onClick={() => setSelectedIcon(Icon)}
+            />
+          ))}
+        </div>
+        <div className="mt-4 flex justify-around">
+          <input
+            type="text"
+            placeholder="Server Name"
+            className="server-name-input"
+          />
+          <button className="submit-btn">Submit</button>
+        </div>
+    </Popup>
+  );
+};
+
+
+const PopupIcon = ({ IconComponent, isSelected, onClick }) => {
+  return (
+    <div
+      className={`add-server-icon ${isSelected ? "selected-icon" : ""}`}
+      onClick={onClick}
+    >
+      <IconComponent size="36" />
     </div>
-    );
-  };
+  );
+};
   
-  export default AddServerPopup;
+export default AddServerPopup;

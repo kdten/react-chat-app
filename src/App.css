@@ -36,8 +36,8 @@
   .sidebar-icon {
     @apply relative flex items-center justify-center 
     h-12 w-12 mt-2 mb-2 mx-auto 
-  bg-gray-400 hover:bg-teal-600 dark:bg-gray-800 
-  text-teal-500 hover:text-white
+    bg-gray-400 hover:bg-teal-600 dark:bg-gray-800 
+    text-teal-500 hover:text-white
     hover:rounded-xl rounded-3xl
     transition-all duration-300 ease-linear
     cursor-pointer shadow-lg;
@@ -229,18 +229,45 @@
 
   .dropdown-selection {
     @apply flex flex-row items-center justify-evenly
-    mt-1 mr-auto ml-2
+    mt-1 mr-auto ml-2 
     transition duration-300 ease-in-out
     cursor-pointer;
   }
 
   .dropdown-selection-text {
-    @apply text-gray-500 font-semibold tracking-wide
-    mr-auto 
+    @apply text-white font-semibold tracking-wide
+    mr-auto text-gray-600
     transition duration-300 ease-in-out 
-    hover:text-pink-500 dark:hover:text-gray-500
-    cursor-pointer;
+    hover:text-gray-400 dark:hover:text-gray-400
+    cursor-pointer w-96;
   }
+
+  .add-server-icon-area {
+    @apply overflow-x-scroll rounded-lg whitespace-nowrap h-48 grid grid-flow-col grid-rows-2 gap-x-5 gap-y-1 bg-gray-300 dark:bg-gray-600
+    border-gray-900;
+  }
+  
+  .add-server-icon {
+    @apply relative flex self-center justify-center 
+    h-14 w-14 px-3 py-2
+    bg-gray-400 hover:bg-teal-600 dark:bg-gray-800
+    text-teal-500 hover:text-white
+    hover:rounded-lg rounded-3xl
+    transition-all duration-500 ease-linear
+    cursor-pointer shadow-lg;
+  }
+  .selected-icon {
+    @apply text-black bg-black;
+  }
+  
+  .server-name-input {
+    @apply border border-gray-300 rounded px-3 py-2 border-blue-500 focus:outline-none transition-colors duration-200;
+  }
+  
+  .submit-btn {
+    @apply text-white bg-blue-500 px-4 py-2 rounded transition-colors duration-200 hover:bg-blue-600;
+  }
+  
 }
 
 @tailwind utilities;
@@ -252,3 +279,33 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-gray-500 dark:bg-green-400;
 }
+
+.popup-overlay {
+  @apply fixed inset-0 z-10 flex justify-center pt-64 items-start bg-black bg-opacity-60;
+}
+
+.popup {
+  @apply relative w-128 bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6;
+}
+
+.popup-header {
+  @apply mb-4;
+}
+
+.popup-title {
+  @apply text-2xl font-bold text-gray-700 dark:text-gray-300 mb-2;
+}
+
+.popup-subtitle {
+  @apply text-gray-600 dark:text-gray-400;
+}
+
+.popup-close {
+  @apply absolute top-1 right-2 text-gray-100 dark:text-gray-400 cursor-pointer p-1 px-2;
+}
+
+.popup-content {
+  @apply mt-4;
+}
+
+
