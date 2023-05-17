@@ -144,7 +144,6 @@ const ChannelBlock = ({ selectedServer }) => (
 
 // Component:
 // ServerName
-// ChannelCategory (reusable for each category)
 // TextChannel (reusable for each text channel)
 // AddChannelButton
 // MembersListButton

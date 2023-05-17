@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import Modal from 'react-modal';
 import {
     FaSearch,
     FaHashtag,
@@ -9,6 +10,9 @@ import {
   } from 'react-icons/fa';
   import useDarkMode from '../hooks/useDarkMode';
   
+// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement('#root');
+
   const TopNav = () => {
     return (
       <div className='top-navigation'>
@@ -36,6 +40,31 @@ import {
     );
   };
   
+  // const UserCircle = () => {
+  //   const [modalIsOpen, setIsOpen] = useState(false);
+  //   const openModal = () => setIsOpen(true);
+  //   const closeModal = () => setIsOpen(false);
+  
+  //   return (
+  //     <div>
+  //       <FaUserCircle
+  //         size='24'
+  //         className='top-navigation-icon'
+  //         onClick={openModal}
+  //       />
+  //       <Modal
+  //         isOpen={modalIsOpen}
+  //         onRequestClose={closeModal}
+  //         contentLabel="User Options Modal"
+  //       >
+  //         <h2>User Options</h2>
+  //         <button onClick={closeModal}>Close</button>
+  //         <button onClick={() => { /* handle logout here */ }}>Logout</button>
+  //       </Modal>
+  //     </div>
+  //   );
+  // };
+
   const Search = () => (
     <div className='search'>
       <input className='search-input' type='text' placeholder='Search...' />

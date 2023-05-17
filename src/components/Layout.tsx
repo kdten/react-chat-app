@@ -31,11 +31,8 @@ const Layout = () => {
                 onServerClick={handleServerClick}
                 selectedServer={selectedServer}
               />
-              {/* <ChannelHeader /> */}
               <ChannelSidebar selectedServer={selectedServer} />
-              <TopNav />
-              {/* <MessageArea />
-              <MessageInputBar /> */}
+              <MessageArea />
             </div>
             <PopupRenderer />
           </PopupProvider>
