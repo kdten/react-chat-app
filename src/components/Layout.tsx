@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { ChannelProvider } from '../contexts/ChannelContext';
 import { TopicProvider } from '../contexts/TopicContext';
 import PopupContext, { PopupProvider } from '../contexts/PopupContext';
+import { SelectedTopicProvider } from '../contexts/SelectedTopicContext';
 import AddServerPopup from './AddServerPopup';
 
 import Popup from './Popup';
@@ -26,14 +27,16 @@ const Layout = () => {
       <ChannelProvider>
         <TopicProvider>
           <PopupProvider>
-            <div className="flex">
-              <ServerSidebar
-                onServerClick={handleServerClick}
-                selectedServer={selectedServer}
-              />
-              <ChannelSidebar selectedServer={selectedServer} />
-              <MessageArea />
-            </div>
+            <SelectedTopicProvider>
+              <div className="flex">
+                <ServerSidebar
+                  onServerClick={handleServerClick}
+                  selectedServer={selectedServer}
+                />
+                <ChannelSidebar selectedServer={selectedServer} />
+                <MessageArea />
+              </div>
+            </SelectedTopicProvider>
             <PopupRenderer />
           </PopupProvider>
         </TopicProvider>

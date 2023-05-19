@@ -4,6 +4,9 @@ import { FaCamera, FaCat, FaHashtag, FaLeaf, FaCode, FaWrench, FaCheck, FaList, 
 import { BsPlus } from 'react-icons/bs';
 import Popup from './Popup';
 
+// import { getDatabase } from "firebase/database";
+// const database = getDatabase();
+
 const icons: object[] = [FaCamera, FaCat, FaHashtag, FaLeaf, FaCode, FaWrench, FaCheck, FaList, FaSnowflake, FaTv, FaQuestion, FaMusic, FaBell, FaTag, FaBook, FaTruck, FaMap, FaImage, FaAtom, FaGamepad, FaCampground, FaFilm];
 
 const AddServerPopup = ({ onClose }) => {

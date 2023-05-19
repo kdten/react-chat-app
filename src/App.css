@@ -65,7 +65,7 @@
     bg-gray-300 dark:bg-gray-700 bg-opacity-90 
     w-full h-16 
     m-0
-    shadow-xl;
+    drop-shadow-lg;
   }  
 
   .top-navigation-icon {
@@ -114,7 +114,7 @@
     h-screen w-full 
     overflow-hidden
     items-center
-    text-gray-500 ml-0 mr-0;
+    text-gray-500;
   }
 
   .content-list {
@@ -249,6 +249,10 @@
     border-gray-900;
   }
   
+  .server-sidebar {
+    @apply fixed top-0 left-0 h-screen w-16 flex flex-col bg-white dark:bg-gray-900 shadow-lg;
+  }
+
   .add-server-icon {
     @apply relative flex self-center justify-center 
     h-14 w-14 px-3 py-2
@@ -261,6 +265,7 @@
   .selected-icon {
     @apply text-black bg-black;
   }
+
   
   .server-name-input {
     @apply border border-gray-300 rounded px-3 py-2 border-blue-500 focus:outline-none transition-colors duration-200;
@@ -316,3 +321,13 @@
   text-gray-500 ml-0 mr-0
   transition duration-300 ease-in-out;
 } */
+
+.signout-button {
+  @apply flex flex-row items-center justify-center
+  w-32 h-12
+  bg-red-500 hover:bg-red-600
+  text-white font-semibold text-lg
+  rounded-lg shadow-lg
+  transition duration-300 ease-in-out
+  cursor-pointer;
+}

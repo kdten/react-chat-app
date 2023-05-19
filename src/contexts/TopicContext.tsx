@@ -3,6 +3,7 @@ import React, { useState, createContext } from 'react';
 interface Topic {
   id: string;
   name: string;
+  channelid: string;
 }
 
 interface TopicContextValue {
