@@ -5,29 +5,24 @@ import './loginpage.css';
 // import the google logo from react-icons/fa
 import { FaGoogle } from 'react-icons/fa';
 
+import { FirebaseProvider, useFirebase, signInWithGoogle, Auth } from './contexts/FirebaseContext';
 
-import {
-  AuthProvider,
-  useAuth,
-  useUser,
-  signInWithGoogle,
-  Auth,
-} from './firebase';
+
 
 function App() {
   return (
-    <AuthProvider>
+    <FirebaseProvider>
       <AppContent />
-    </AuthProvider>
+    </FirebaseProvider>
   );
 }
 
 function AppContent() {
-  const auth = useAuth();
-  const user = useUser();
+  const { auth, user } = useFirebase();
 
   return <>{user ? <Layout /> : <SignIn auth={auth} />}</>;
 }
+
 function SignIn({ auth }: { auth: Auth | null }): React.ReactElement | null {
   const handleSignInWithGoogle = () => {
     if (auth) {
